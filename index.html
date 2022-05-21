@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Место</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+  <header class="header">
+    <div class="header__logo"></div>
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__avatar" src="./images/Avatar.jpg">
+      <div class="profile__info">
+        <div class="profile__block">
+          <h1 class="profile__info__title">Жак-Ив Кусто</h1>
+          <button type="button" class="profile__edit-button"></button>
+        </div>
+        <h2 class="profile__info__subtitle">Исследователь океана</h2>
+      </div>
+      <button type="button" class="profile__add-button"></button>
+    </section>
+    <section class="elements-container">
+      <ul class="elements">
+        <li class="elements__card">
+          <img src="./images/karachaevsk.jpg" class="elements__image" alt="Карачаевск.">
+          <div class="elements__title-wrapper">
+            <h2 class="elements__title">Карачаевск</h2>
+              <div class="elements__like-wrapper">
+                <button type="button" class="elements__like-button"></button>
+              </div>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img src="./images/elbrus.jpg" class="elements__image" alt="Эльбрус.">
+          <div class="elements__title-wrapper">
+            <h2 class="elements__title">Гора Эльбрус</h2>
+              <div class="elements__like-wrapper">
+                <button type="button" class="elements__like-button"></button>
+              </div>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img src="./images/dombai.jpg" class="elements__image" alt="Домбай.">
+          <div class="elements__title-wrapper">
+            <h2 class="elements__title">Домбай</h2>
+              <div class="elements__like-wrapper">
+                <button type="button" class="elements__like-button"></button>
+              </div>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img src="./images/elbrus.jpg" class="elements__image" alt="Эльбрус.">
+          <div class="elements__title-wrapper">
+            <h2 class="elements__title">Эльбрус</h2>
+              <div class="elements__like-wrapper">
+                <button type="button" class="elements__like-button"></button>
+              </div>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img src="./images/dombai.jpg" class="elements__image" alt="Домбай.">
+          <div class="elements__title-wrapper">
+            <h2 class="elements__title">Домбай</h2>
+              <div class="elements__like-wrapper">
+                <button type="button" class="elements__like-button"></button>
+              </div>
+          </div>
+        </li>
+        <li class="elements__card">
+          <img src="./images/karachaevsk.jpg" class="elements__image" alt="Карачаево-Черкессия.">
+          <div class="elements__title-wrapper">
+            <h2 class="elements__title">Карачаево-Черкессия</h2>
+              <div class="elements__like-wrapper">
+                <button type="button" class="elements__like-button"></button>
+              </div>
+          </div>
+        </li>   
+      </ul>
+    </section>    
+  </main>
+  <footer class="footer">
+    <p class="footer__copyrights">© 2020 Mesto Russia</p>
+  </footer>
+  <section class="popup">
+  <div class="popup__container">
+    <form class="popup__form" name="popup-form" novalidate="">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input type="text" name="Имя" class="popup__form__field" placeholder="Имя" value="Жак-Ив Кусто">
+      <input type="text" name="О себе" class="popup__form__field" placeholder="О себе" value="Исследователь океана">
+      <button type="submit" class="popup__submit-button">Сохранить</button>
+    </form>
+    <button type="button" class="popup__close-button"></button>
+   </div>
+   <div class="popup__overlay"></div>
+  </section>  
+</body>
+</html>

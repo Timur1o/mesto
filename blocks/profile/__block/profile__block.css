@@ -1,0 +1,10 @@
+.profile__block {
+  display: flex;
+  align-items: baseline;
+}
+
+@media (max-width: 767px) {
+  .profile__block {
+    margin-right: 0;
+  }
+}
