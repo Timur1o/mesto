@@ -5,12 +5,12 @@
   font-weight: 400;
   line-height: 22px;
   margin: 18px 0 0 0;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   white-space: nowrap;
   overflow: hidden;
 }
 
-@media (max-width: 879px) {
+@media (max-width:768px) {
   .profile__info__subtitle {
     font-size: 14px;
     line-height: 100%;

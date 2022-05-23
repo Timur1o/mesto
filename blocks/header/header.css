@@ -6,7 +6,7 @@
   padding-top: 45px;
 }
 
-@media (max-width: 879px) {
+@media (max-width:768px) {
   .header {
     padding-top: 28px;
     padding-bottom: 32px;

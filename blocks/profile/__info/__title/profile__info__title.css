@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-@media (max-width: 879px) {
+@media (max-width:768px) {
   .profile__info__title {
     font-size: 27px;
     line-height: 100%;

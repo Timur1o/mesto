@@ -3,7 +3,7 @@
   margin-right: auto;
 }
 
-@media (max-width: 879px) {
+@media (max-width:768px) {
   .profile__info {
     text-align: center;
     max-width: 100%;
