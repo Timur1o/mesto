@@ -1,0 +1,24 @@
+.elements__list {
+  max-width: 880px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit,282px);
+  gap: 20px 17px;
+  margin: 0 auto;
+  padding: 50px 0 66px;
+}
+
+   li {
+    list-style-type: none;
+   }
+   ul {
+    padding-left: 0;
+   }
+
+
+@media (max-width:1023px) {
+  .elements__list {
+    width: 90%;
+    padding: 36px 0 48px;
+  }
+}

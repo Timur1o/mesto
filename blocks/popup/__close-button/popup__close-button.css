@@ -9,16 +9,16 @@
   height: 32px;
   width: 32px;
   outline: none;
-  padding: 0;
   position: absolute;
   right: -40px;
   top: -40px;
   transition: .2s;
+  padding: 0;
 }
 
 .popup__close-button:hover {
   cursor: pointer;
-  opacity: 60%;
+  opacity: .6;
 }
 
 @media (max-width: 768px) {

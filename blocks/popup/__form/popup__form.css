@@ -3,12 +3,6 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: calc(100% - 72px);
+  max-width: 86%;
   padding: 0;
-}
-
-@media (max-width: 768px) {
-  .popup__form {
-    max-width: calc(100% - 44px);
-  }
 }

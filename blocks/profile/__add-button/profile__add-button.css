@@ -8,17 +8,18 @@
   border: 2px solid #fff;
   border-radius: 2px;
   outline: none;
-  padding: 0;
   transition: .2s;
+  padding: 0;
 }
 .profile__add-button:hover {
   cursor: pointer;
-  opacity: 60%;
+  opacity: .6;
 }
 
 @media (max-width:768px) {
   .profile__add-button {
     max-width: 282px;
     width: 100%;
+    background-size: 16px;
   }
 }

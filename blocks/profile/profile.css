@@ -1,11 +1,16 @@
 .profile {
-  font-family: 'Inter', Arial, sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 880px;
   margin: 0 auto;
   padding-top: 40px;
+}
+
+@media (max-width:1023px) {
+  .profile {
+    max-width: 90%;
+  }
 }
 
 @media (max-width:768px) {

@@ -4,9 +4,9 @@
   padding-bottom: 60px;
 }
 
-@media (max-width:768px) {
+@media (max-width:1023px) {
   .footer {
-    width: 88%;
+    width: 90%;
     padding-bottom: 36px;
   }
 }

@@ -1,4 +1,4 @@
-.elements__card {
+.element {
   max-width: 100%;
   display: grid;
   grid-template-rows: 282px 1fr;

@@ -1,6 +1,4 @@
-.elements__title {
-  max-width: 90%;
-  font-family: 'Inter', Arial, sans-serif;
+.element__title {
   font-size: 24px;
   font-weight: 900;
   line-height: 29.09px;
