@@ -1,4 +1,4 @@
-.profile__info_subtitle {
+.profile__info-subtitle {
   color: #FFF;
   font-size: 18px;
   font-weight: 400;
@@ -10,7 +10,7 @@
 }
 
 @media (max-width:768px) {
-  .profile__info_subtitle {
+  .profile__info-subtitle {
     font-size: 14px;
     line-height: 100%;
     margin: 14px auto 0 auto;
