@@ -1,0 +1,4 @@
+.element__delete-button_active {
+  background-image: url(../../../../images/Trash.svg);
+  opacity: 1;
+}

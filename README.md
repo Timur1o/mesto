@@ -4,6 +4,7 @@
 Стек
 HTML
 CSS
+JavaScript
 
 Реализация
 Flexbox вёрстка
@@ -18,6 +19,7 @@ Mesto. The project for Yandex.Praktikum
 Stack
 HTML
 CSS
+JavaScript
 
 Realization
 Flexbox layout
