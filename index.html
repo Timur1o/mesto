@@ -15,10 +15,10 @@
       <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватар.">
       <div class="profile__info">
         <div class="profile__block">
-          <h1 class="profile__info-title">...</h1>
+          <h1 class="profile__info-title">Жак-Ив Кусто</h1>
           <button aria-label="Edit profile" type="button" class="profile__edit-button"></button>
         </div>
-        <h2 class="profile__info-subtitle">...</h2>
+        <h2 class="profile__info-subtitle">Исследователь моря</h2>
       </div>
       <button aria-label="Add element" type="button" class="profile__add-button"></button>
     </section>
@@ -32,27 +32,26 @@
   </footer>
   <section class="popup popup-edit">
     <div class="popup__container">
-      <form class="popup__form" name="popup-form" novalidate="">
+      <form class="popup__form" name="edit-profile" novalidate="">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" name="Имя" class="popup__form-field" placeholder="Имя" value="Жак-Ив Кусто">
-        <input type="text" name="О себе" class="popup__form-field" placeholder="О себе" value="Исследователь океана">
-        <button aria-label="Save" type="button" class="popup__submit-button">Сохранить</button>
+        <input type="text" name="name" class="popup__form-field" placeholder="Имя">
+        <input type="text" name="about" class="popup__form-field" placeholder="О себе">
+        <button aria-label="Save" type="submit" class="popup__submit-button">Сохранить</button>
       </form>
       <button aria-label="Close" type="button" class="popup__close-button"></button>
     </div>
   </section>
   <section class="popup popup-add">
     <div class="popup__container">
-      <form class="popup__form" name="popup-form" novalidate="">
+      <form class="popup__form" name="new-place" novalidate="">
         <h2 class="popup__title">Новое место</h2>
-        <input type="text" name="Имя" class="popup__form-field" placeholder="Название">
-        <input type="text" name="О себе" class="popup__form-field" placeholder="Ссылка на картинку">
-        <button aria-label="Save" type="button" class="popup__submit-button">Создать</button>
+        <input type="text" name="name" class="popup__form-field" placeholder="Название">
+        <input type="text" name="link" class="popup__form-field" placeholder="Ссылка на картинку">
+        <button aria-label="Save" type="submit" class="popup__submit-button">Создать</button>
       </form>
       <button aria-label="Close" type="button" class="popup__close-button"></button>
     </div>
   </section>
-  
   <section class="popup popup-image">
     <figure class="popup__image-container">
       <img src="" alt="" class="element__image-zoom">
@@ -60,7 +59,16 @@
       <button aria-label="Close" type="button" class="popup__close-button"></button>
     </figure>
   </section>
-  
+  <template>
+    <li class="element">
+      <img src="" class="element__image" alt="">
+      <button aria-label="Delete" type="button" class="element__delete-button"></button>
+      <div class="element__title-wrapper">
+        <h2 class="element__title"></h2>
+        <button aria-label="Like" type="button" class="element__like-button"></button>
+      </div>
+    </li>
+  </template>
 </body>
-  <script src="script.js"></script>
+  <script src="./scripts/script.js"></script>
 </html>
