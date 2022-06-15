@@ -1,24 +1,24 @@
 const content = document.querySelector('.content');
-const profileName = document.querySelector('.profile__info-title');
+const profileTitle = document.querySelector('.profile__info-title');
 const profileJob = document.querySelector('.profile__info-subtitle')
-const popup = document.querySelector('.popup-edit');
+const editForm = document.querySelector('.popup__form[name="edit-profile"]')
+const profileName = editForm.querySelector('[name="name"]');
+const profileAbout = editForm.querySelector('[name="about"]');
 const popupAdd = document.querySelector('.popup-add');
 const popupEdit = document.querySelector('.popup-edit');
 const popupImg = document.querySelector('.popup-image');
 const img = document.querySelector('.popup-image img')
 const figcaption = document.querySelector('.popup-image .element__image-name')
 const elementsList = document.querySelector('.elements__list');
-const editForm = document.querySelector('.popup__form[name="edit-profile"]')
 const newPlaceForm = document.querySelector('.popup__form[name="new-place"]')
 const profileInfoTitle = document.querySelector('.profile__info-title');
 const profileInfoSubtitle = document.querySelector('.profile__info-subtitle');
 const template = document.querySelector('template');
 const editProfileOpen = document.querySelector('.page .content .profile .profile__edit-button');
-const editProfileClose = document.querySelector('.popup-edit .popup__close-button');
+const cardName = newPlaceForm.querySelector('[name="name"]');
+const cardLink = newPlaceForm.querySelector('[name="link"]');
 const addCardForm = document.querySelector('.page .content .profile .profile__add-button');
-const addCardButton = document.querySelector('.popup-add .popup__submit-button');
-const closeAddCardForm = document.querySelector('.popup-add .popup__close-button')
-const closeImgButton = document.querySelector('.popup-image .popup__close-button')
+const closeButtons = document.querySelectorAll('.popup__close-button');
 const initialCards = [{
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
@@ -42,13 +42,13 @@ const initialCards = [{
 window.addEventListener('load', function() {
     drawInitialCards()
     editProfileOpen.addEventListener('click', openProfileForm);
-    editProfileClose.addEventListener('click', closeProfileForm);
     editForm.addEventListener('submit', saveProfileForm);
     newPlaceForm.addEventListener('submit', addCard);
     addCardForm.addEventListener('click', openAddForm);
-    addCardButton.addEventListener('click', addCard);
-    closeAddCardForm.addEventListener('click', closeAddForm);
-    closeImgButton.addEventListener('click', closeImg);
+    closeButtons.forEach((button) => {
+        const popup = button.closest('.popup');
+        button.addEventListener('click', () => closePopup(popup));
+      });
 })
 
 function openPopup(popup) {
@@ -61,10 +61,9 @@ function closePopup(popup) {
 
 function openProfileForm() {
     openPopup(popupEdit)
-    let name = editForm.querySelector('[name="name"]');
-    let job = editForm.querySelector('[name="about"]');
-    name.value = profileInfoTitle.innerText;
-    job.value = profileInfoSubtitle.innerText;
+
+    profileName.value = profileInfoTitle.innerText;
+    profileAbout.value = profileInfoSubtitle.innerText;
 }
 
 function closeProfileForm() {
@@ -80,18 +79,13 @@ function closeAddForm() {
 }
 
 function openImg(event) {
-    const card = event.currentTarget;
-    const image = card.querySelector('.element__image');
-    const link = image.src;
-    const name = image.alt;
+    let image = event.currentTarget;
+    let link = image.src;
+    let name = image.alt;
     figcaption.innerText = name;
     img.src = link;
     img.alt = name;
     openPopup(popupImg);
-}
-
-function closeImg() {
-    closePopup(popupImg);
 }
 
 function saveProfileForm(event) {
@@ -106,10 +100,8 @@ function saveProfileForm(event) {
         profileInfoSubtitle.innerText = job;
     }
 
-    let name = editForm.querySelector('[name="name"]');
-    let job = editForm.querySelector('[name="about"]');
-    saveName(name.value);
-    saveJob(job.value);
+    saveName(profileName.value);
+    saveJob(profileAbout.value);
     closeProfileForm();
 }
 
@@ -117,56 +109,41 @@ function addCard(event) {
     event.stopPropagation();
     event.preventDefault();
 
-    let name = newPlaceForm.querySelector('[name="name"]');
-    let link = newPlaceForm.querySelector('[name="link"]');
-    createCard(name.value , link.value);
+    elementsList.prepend(getCard(cardName.value , cardLink.value));
     
-    name.value = '';
-    link.value = '';
-
+    event.currentTarget.reset();
+    
     closeAddForm();
 }
-function createCard(name, link) {
-    const cardClone = template.content.firstElementChild.cloneNode(true);
-    const elementImage = cardClone.querySelector('.element__image');
+function getCard(name, link) {
+    let cardClone = template.content.firstElementChild.cloneNode(true);
+    let elementImage = cardClone.querySelector('.element__image');
     elementImage.src = link;
     elementImage.alt = name;
     cardClone.querySelector('.element__title').textContent = name;
-    cardClone.addEventListener('click', openImg);
+    elementImage.addEventListener('click', openImg);
     cardClone.querySelector('.element__like-button').addEventListener('click', like);
     cardClone.querySelector('.element__delete-button').addEventListener('click', removeCard);
-    elementsList.prepend(cardClone);
+    return cardClone;
+
 }
 
 function like(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    const button = event.currentTarget;
-
-    const isLiked = button.classList.contains('element__like-button_active');
-    if (isLiked) {
-        button.classList.remove('element__like-button_active')
-    } else {
-        button.classList.add('element__like-button_active')
-    }
-    
+    event.currentTarget.classList.toggle('element__like-button_active');
 }
 
 function removeCard(event) {
-    event.stopPropagation();
-    event.preventDefault();
 
-    const button = event.currentTarget;
-    const card = button.closest('.element');
+    let button = event.currentTarget;
+    let card = button.closest('.element');
     card.remove();
 }
 
 function drawInitialCards() {
 
     for (let i = 0; i < initialCards.length; i = i + 1) {
-        const card = initialCards[i];
-        createCard(card.name, card.link)
+        let card = initialCards[i];
+        elementsList.prepend(getCard(card.name, card.link));
     }
 
 }
