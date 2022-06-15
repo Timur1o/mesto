@@ -79,9 +79,9 @@ function closeAddForm() {
 }
 
 function openImg(event) {
-    let image = event.currentTarget;
-    let link = image.src;
-    let name = image.alt;
+    const image = event.currentTarget;
+    const link = image.src;
+    const name = image.alt;
     figcaption.innerText = name;
     img.src = link;
     img.alt = name;
@@ -116,8 +116,8 @@ function addCard(event) {
     closeAddForm();
 }
 function getCard(name, link) {
-    let cardClone = template.content.firstElementChild.cloneNode(true);
-    let elementImage = cardClone.querySelector('.element__image');
+    const cardClone = template.content.firstElementChild.cloneNode(true);
+    const elementImage = cardClone.querySelector('.element__image');
     elementImage.src = link;
     elementImage.alt = name;
     cardClone.querySelector('.element__title').textContent = name;
@@ -134,15 +134,15 @@ function like(event) {
 
 function removeCard(event) {
 
-    let button = event.currentTarget;
-    let card = button.closest('.element');
+    const button = event.currentTarget;
+    const card = button.closest('.element');
     card.remove();
 }
 
 function drawInitialCards() {
 
     for (let i = 0; i < initialCards.length; i = i + 1) {
-        let card = initialCards[i];
+        const card = initialCards[i];
         elementsList.prepend(getCard(card.name, card.link));
     }
 
