@@ -1,3 +1,9 @@
+import '../styles/index.css'; // добавьте импорт главного файла стилей
+import './validate.js'; 
+import './card.js'; 
+import './modal.js'; 
+import './utils.js'; 
+
 const content = document.querySelector('.content');
 const profileTitle = document.querySelector('.profile__info-title');
 const profileJob = document.querySelector('.profile__info-subtitle')
