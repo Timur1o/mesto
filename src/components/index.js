@@ -1,20 +1,13 @@
 import '../styles/index.css'; // добавьте импорт главного файла стилей
-import './validate.js'; 
+import {validateForm} from './validate.js'; 
 import './card.js'; 
-import './modal.js'; 
+import {openPopup, closePopup, openAddForm, closeAddForm, openImg, closeProfileForm} from './modal.js'; 
 import './utils.js'; 
 
-const content = document.querySelector('.content');
-const profileTitle = document.querySelector('.profile__info-title');
-const profileJob = document.querySelector('.profile__info-subtitle')
 const editForm = document.querySelector('.popup__form[name="edit-profile"]')
 const profileName = editForm.querySelector('[name="name"]');
 const profileAbout = editForm.querySelector('[name="about"]');
-const popupAdd = document.querySelector('.popup-add');
 const popupEdit = document.querySelector('.popup-edit');
-const popupImg = document.querySelector('.popup-image');
-const img = document.querySelector('.popup-image img')
-const figcaption = document.querySelector('.popup-image .element__image-name')
 const elementsList = document.querySelector('.elements__list');
 const newPlaceForm = document.querySelector('.popup__form[name="new-place"]')
 const profileInfoTitle = document.querySelector('.profile__info-title');
@@ -57,14 +50,6 @@ window.addEventListener('load', function() {
       });
 })
 
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-}
-
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-}
-
 function openProfileForm() {
     openPopup(popupEdit)
 
@@ -72,31 +57,15 @@ function openProfileForm() {
     profileAbout.value = profileInfoSubtitle.innerText;
 }
 
-function closeProfileForm() {
-    closePopup(popupEdit);
-}
-
-function openAddForm() {
-    openPopup(popupAdd);
-}
-
-function closeAddForm() {
-    closePopup(popupAdd);
-}
-
-function openImg(event) {
-    const image = event.currentTarget;
-    const link = image.src;
-    const name = image.alt;
-    figcaption.innerText = name;
-    img.src = link;
-    img.alt = name;
-    openPopup(popupImg);
-}
-
 function saveProfileForm(event) {
     event.stopPropagation();
     event.preventDefault();
+    const formError = validateForm(event.currentTarget, [
+        {selector: '#name' , regExp: new RegExp('^[А-Яа-яЁёA-Za-z\s]+$')},
+        {selector: '#about' , regExp: new RegExp('^https?:\/\/.+$')},
+    ]);
+    const errorSpan = event.currentTarget.querySelector('span.error');
+    errorSpan.textContent = formError;
 
     function saveName(name) {
         profileInfoTitle.innerText = name; 
@@ -105,21 +74,32 @@ function saveProfileForm(event) {
     function saveJob(job) {
         profileInfoSubtitle.innerText = job;
     }
-
+   if(!formError) {
     saveName(profileName.value);
     saveJob(profileAbout.value);
     closeProfileForm();
+   }
 }
 
 function addCard(event) {  
     event.stopPropagation();
     event.preventDefault();
+    const formError = validateForm(event.currentTarget, [
+        {selector: '#place-name' , regExp: new RegExp('^[А-Яа-яЁёA-Za-z\s]+$')},
+        {selector: '#url-link' , regExp: new RegExp('^https?:\/\/.+$')},
+    ]);
+    const errorSpan = event.currentTarget.querySelector('span.error');
+    errorSpan.textContent = formError;
+    if(!formError) {
 
-    elementsList.prepend(getCard(cardName.value , cardLink.value));
+        elementsList.prepend(getCard(cardName.value , cardLink.value));
     
-    event.currentTarget.reset();
-    
-    closeAddForm();
+        event.currentTarget.reset();
+        
+        closeAddForm();
+    }
+
+
 }
 function getCard(name, link) {
     const cardClone = template.content.firstElementChild.cloneNode(true);
