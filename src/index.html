@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
 </head>
+
 <body class="page">
   <header class="header">
     <div class="header__logo"></div>
@@ -24,7 +26,7 @@
     <section class="elements">
       <ul class="elements__list">...
       </ul>
-    </section> 
+    </section>
   </main>
   <footer class="footer">
     <p class="footer__copyrights">© 2022 Mesto Russia</p>
@@ -33,9 +35,12 @@
     <div class="popup__container">
       <form class="popup__form" name="edit-profile" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input data-error="Ошибка: Имя" type="text" id="name" name="name" class="popup__form-field" placeholder="Имя" minlength="1" required>
-        <input data-error="Ошибка: О себе" type="text" id="about" name="about" class="popup__form-field" placeholder="О себе">
-        <span class="error" aria-live="polite"></span>
+        <input data-error-message="Ошибка: Имя" type="text" id="name-input" name="name" class="popup__form-field"
+          placeholder="Имя" minlength="1" pattern="[a-zA-Z]+$" required>
+        <span class="name-input-error popup__form-error"></span>
+        <input data-error-message="Ошибка: О себе" type="text" id="about-input" name="about" class="popup__form-field"
+          placeholder="О себе">
+        <span class="about-input-error popup__form-error"></span>
         <button aria-label="Save" type="submit" class="popup__submit-button">Сохранить</button>
       </form>
       <button aria-label="Close" type="button" class="popup__close-button"></button>
@@ -45,10 +50,14 @@
     <div class="popup__container">
       <form class="popup__form" name="new-place" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input data-error="Ошибка: Название" type="text" id="place-name" name="name" class="popup__form-field" placeholder="Название" required minlength="1" >
-        <input data-error="Ошибка: Ссылка на картинку" type="url" id="url-link" name="link" class="popup__form-field" placeholder="Ссылка на картинку" required minlength="1">
-        <span class="error" aria-live="polite"></span>
+        <input data-error-message="Ошибка: Название" type="text" id="place-input" name="name" class="popup__form-field"
+          placeholder="Название" required minlength="1">
+        <span class="place-input-error popup__form-error"></span>
+        <input data-error-message="Ошибка: Ссылка на картинку" type="url" id="url-input" name="link"
+          class="popup__form-field" placeholder="Ссылка на картинку" required minlength="1">
+        <span class="url-input-error popup__form-error"></span>
         <button aria-label="Save" type="submit" class="popup__submit-button">Создать</button>
+
       </form>
       <button aria-label="Close" type="button" class="popup__close-button"></button>
     </div>
@@ -71,4 +80,5 @@
     </li>
   </template>
 </body>
+
 </html>

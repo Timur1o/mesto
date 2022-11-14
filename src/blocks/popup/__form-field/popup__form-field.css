@@ -13,10 +13,10 @@
   margin-bottom: 0;
 }
 
-.popup__form-field:invalid {
+.popup__form-field_error_active {
   border: 1px solid red; /* красная рамка для некорректных данных */
 } 
 
-.popup__form-field:valid {
+.popup__form-field_valid {
   border: 1px solid green; /* зелёная - для корректных */
 } 

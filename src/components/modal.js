@@ -1,25 +1,23 @@
-const popupAdd = document.querySelector('.popup-add');
-const popupImg = document.querySelector('.popup-image');
-const img = document.querySelector('.popup-image img');
-const figcaption = document.querySelector('.popup-image .element__image-name');
-const popupEdit = document.querySelector('.popup-edit');
-
+import {
+    popupAdd, figcaption, popupImg, popupEdit, img,
+    profileName, profileAbout, profileInfoTitle, profileInfoSubtitle
+} from './utils';
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
-}
+};
 
 export function closePopup(popup) {
     popup.classList.remove('popup_opened');
-}
+};
 
 export function openAddForm() {
     openPopup(popupAdd);
-}
+};
 
 export function closeAddForm() {
     closePopup(popupAdd);
-}
+};
 
 export function openImg(event) {
     const image = event.currentTarget;
@@ -29,10 +27,31 @@ export function openImg(event) {
     img.src = link;
     img.alt = name;
     openPopup(popupImg);
-}
+};
 
 export function closeProfileForm() {
     closePopup(popupEdit);
-}
+};
 
+export function openProfileForm() {
+    openPopup(popupEdit)
+    profileName.value = profileInfoTitle.innerText;
+    profileAbout.value = profileInfoSubtitle.innerText;
+};
 
+export function saveProfileForm(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    function saveName(name) {
+        profileInfoTitle.innerText = name;
+    }
+
+    function saveJob(job) {
+        profileInfoSubtitle.innerText = job;
+    }
+
+    saveName(profileName.value);
+    saveJob(profileAbout.value);
+    closeProfileForm();
+};
