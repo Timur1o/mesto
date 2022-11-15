@@ -37,4 +37,11 @@ export const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
 }];
 
+export const settings = {
+    popupSubmitButtonSelector: '.popup__submit-button',
+    popupFormField: '.popup__form-field',
+    popupFormFieldError: 'popup__form-field-error_active',
+    popupFormFieldTypeError: 'popup__form-field_type_error'
+}
+
 

@@ -2,7 +2,7 @@ import '../styles/index.css';
 import { enableValidation } from './validate';
 import { addCard, drawInitialCards } from './card';
 import { closePopup, openAddForm, openProfileForm, saveProfileForm } from './modal';
-import { editForm, newPlaceForm, editProfileOpen, addCardForm } from './utils';
+import { editForm, newPlaceForm, editProfileOpen, addCardForm, settings } from './utils';
 
 window.addEventListener('load', function () {
     drawInitialCards()
@@ -21,8 +21,8 @@ window.addEventListener('load', function () {
             }
         })
     })
-    enableValidation(editForm);
-    enableValidation(newPlaceForm);
+    enableValidation({ formElement: editForm, ...settings });
+    enableValidation({ formElement: newPlaceForm, ...settings });
 });
 
 
