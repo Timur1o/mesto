@@ -14,7 +14,6 @@ export const profileInfoTitle = document.querySelector('.profile__info-title');
 export const profileInfoSubtitle = document.querySelector('.profile__info-subtitle');
 export const editProfileOpen = document.querySelector('.page .content .profile .profile__edit-button');
 export const addCardForm = document.querySelector('.page .content .profile .profile__add-button');
-export const closeButtons = document.querySelectorAll('.popup__close-button');
 export const cardName = newPlaceForm.querySelector('[name="name"]');
 export const cardLink = newPlaceForm.querySelector('[name="link"]');
 export const template = document.querySelector('template');

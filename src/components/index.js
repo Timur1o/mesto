@@ -2,11 +2,7 @@ import '../styles/index.css';
 import { enableValidation } from './validate';
 import { addCard, drawInitialCards } from './card';
 import { closePopup, openAddForm, openProfileForm, saveProfileForm } from './modal';
-import {
-    popupAdd, popupImg, editForm,
-    popupEdit, newPlaceForm,
-    editProfileOpen, addCardForm, closeButtons
-} from './utils';
+import { editForm, newPlaceForm, editProfileOpen, addCardForm } from './utils';
 
 window.addEventListener('load', function () {
     drawInitialCards()
@@ -14,31 +10,21 @@ window.addEventListener('load', function () {
     editForm.addEventListener('submit', saveProfileForm);
     newPlaceForm.addEventListener('submit', addCard);
     addCardForm.addEventListener('click', openAddForm);
-    closeButtons.forEach((button) => {
-        const popup = button.closest('.popup');
-        button.addEventListener('click', () => closePopup(popup));
-    });
-})
-
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { // 
-        closePopup(popupAdd);
-        closePopup(popupEdit);
-        closePopup(popupImg);
-    }
+    const popups = document.querySelectorAll('.popup');
+    popups.forEach((popup) => {
+        popup.addEventListener('mousedown', (evt) => {
+            if (evt.target.classList.contains('popup_opened')) {
+                closePopup(popup);
+            }
+            if (evt.target.classList.contains('popup__close-button')) {
+                closePopup(popup);
+            }
+        })
+    })
+    enableValidation(editForm);
+    enableValidation(newPlaceForm);
 });
 
-document.addEventListener('click', (e) => {
-    if (e.target === popupAdd) {
-        closePopup(popupAdd);
-    }
-    if (e.target === popupEdit) {
-        closePopup(popupEdit);
-    }
-    if (e.target === popupImg) {
-        closePopup(popupImg);
-    }
-});
 
-enableValidation();
+
 
