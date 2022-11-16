@@ -35,11 +35,11 @@
     <div class="popup__container">
       <form class="popup__form" name="edit-profile" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input data-error-message="Используйте только русские и латинские символы" type="text" id="name-input" name="name" class="popup__form-field"
-          placeholder="Имя" minlength="3" pattern="^[a-zA-Zа-яА-Я-\s]+$" required>
+        <input data-error-message="Используйте только русские и латинские символы" type="text" id="name-input"
+          name="name" class="popup__form-field" placeholder="Имя" minlength="3" pattern="^[a-zA-Zа-яА-Я-\s]+$" required>
         <span class="name-input-error popup__form-field-error"></span>
-        <input data-error-message="Используйте только русские и латинские символы" type="text" id="about-input" name="about" class="popup__form-field"
-          placeholder="О себе" pattern="^[a-zA-Zа-яА-Я-\s]+$" required>
+        <input data-error-message="Используйте только русские и латинские символы" type="text" id="about-input"
+          name="about" class="popup__form-field" placeholder="О себе" pattern="^[a-zA-Zа-яА-Я-\s]+$" required>
         <span class="about-input-error popup__form-field-error"></span>
         <button aria-label="Save" type="submit" class="popup__submit-button">Сохранить</button>
       </form>
@@ -50,11 +50,12 @@
     <div class="popup__container">
       <form class="popup__form" name="new-place" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input data-error-message="Используйте только русские и латинские символы" type="text" id="place-input" name="name" class="popup__form-field"
-          placeholder="Название" pattern="^[a-zA-Zа-яА-Я-\s]+$" required minlength="1">
+        <input data-error-message="Используйте только русские и латинские символы" type="text" id="place-input"
+          name="name" class="popup__form-field" placeholder="Название" pattern="^[a-zA-Zа-яА-Я-\s]+$" required
+          minlength="1">
         <span class="place-input-error popup__form-field-error"></span>
-        <input data-error-message="Введите URL" type="url" id="url-input" name="link"
-          class="popup__form-field" placeholder="Ссылка на картинку" required minlength="7">
+        <input data-error-message="Введите URL" type="url" id="url-input" name="link" class="popup__form-field"
+          placeholder="Ссылка на картинку" required minlength="7">
         <span class="url-input-error popup__form-field-error"></span>
         <button aria-label="Save" type="submit" class="popup__submit-button">Создать</button>
 
