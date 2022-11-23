@@ -7,15 +7,16 @@
   background-color: #000;
   color: #FFF;
   transition: .2s;
-  margin-top: 48px;
-  margin-bottom: 37px;
+  margin-top: 31.34px;
+  margin-bottom: 36.5px;
   border-radius: 2px;
   outline: auto;
   padding: 0;
 }
 
-.popup__submit-button_inactive {
-  background-color: rgb(116, 111, 111);
+.popup__submit-button.disabled {
+  background-color: #FFF;
+  color: #C4C4C4;
 }
 
 .popup__submit-button:hover {

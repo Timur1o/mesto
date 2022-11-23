@@ -1,8 +1,9 @@
 import '../styles/index.css';
 import { enableValidation } from './validate';
 import { addCard, drawInitialCards } from './card';
-import { closePopup, openAddForm, openProfileForm, saveProfileForm } from './modal';
-import { editForm, newPlaceForm, editProfileOpen, addCardForm, settings } from './utils';
+import { closePopup, openAddForm, openProfileForm, saveProfileForm , openAvatarEdit, saveNewAvatar} from './modal';
+import { editForm, newPlaceForm, editProfileOpen, addCardForm, settings , avatarEditForm, avatarOverlay} from './utils';
+
 
 window.addEventListener('load', function () {
     drawInitialCards()
@@ -10,6 +11,8 @@ window.addEventListener('load', function () {
     editForm.addEventListener('submit', saveProfileForm);
     newPlaceForm.addEventListener('submit', addCard);
     addCardForm.addEventListener('click', openAddForm);
+    avatarOverlay.addEventListener('click', openAvatarEdit)
+    avatarEditForm.addEventListener('submit', saveNewAvatar)
     const popups = document.querySelectorAll('.popup');
     popups.forEach((popup) => {
         popup.addEventListener('mousedown', (evt) => {
@@ -23,6 +26,7 @@ window.addEventListener('load', function () {
     })
     enableValidation({ formElement: editForm, ...settings });
     enableValidation({ formElement: newPlaceForm, ...settings });
+    enableValidation({ formElement: avatarEditForm, ...settings });
 });
 
 

@@ -3,6 +3,10 @@
 export const popupAdd = document.querySelector('.popup-add');
 export const popupImg = document.querySelector('.popup-image');
 export const img = document.querySelector('.popup-image img');
+export const popupAvatar = document.querySelector('.popup-avatar');
+export const avatarEditForm = document.querySelector('.popup__form[name="avatar"]');
+export const avatarImg = document.querySelector('.profile__avatar');
+export const avatarOverlay = document.querySelector('.profile__edit-overlay');
 export const figcaption = document.querySelector('.popup-image .element__image-name');
 export const editForm = document.querySelector('.popup__form[name="edit-profile"]')
 export const profileName = editForm.querySelector('[name="name"]');

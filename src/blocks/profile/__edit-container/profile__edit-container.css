@@ -1,0 +1,7 @@
+.profile__edit-container {
+    position: relative;
+}
+
+.profile__edit-container:hover .profile__edit-overlay {
+    visibility: visible;
+}

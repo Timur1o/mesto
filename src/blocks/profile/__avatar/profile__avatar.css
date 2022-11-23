@@ -4,6 +4,7 @@
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
+  position: relative;
 }
 
 @media (max-width:768px) {

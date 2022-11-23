@@ -2,13 +2,16 @@
 import {
     popupAdd, figcaption, popupImg, popupEdit, img,
     profileName, profileAbout, profileInfoTitle, profileInfoSubtitle, editForm, newPlaceForm,
-    settings
+    settings, popupAvatar
 } from './utils';
-import { revalidateForm } from './validate';
+import { hideInputError } from './validate';
 
 export function openPopup(popup) {
+    const openedForm = popup.querySelector('.popup__form');
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
+    openedForm.reset();
+    
 };
 
 export function closePopup(popup) {
@@ -70,3 +73,24 @@ export function saveProfileForm(event) {
     saveJob(profileAbout.value);
     closeProfileForm();
 };
+
+export function openAvatarEdit() {
+    openPopup(popupAvatar);
+}
+
+export function closeAvatarForm() {
+    closePopup(popupAvatar);
+}
+
+export function saveNewAvatar (event) {
+    event.preventDefault();
+
+    const avatarImage = document.querySelector('.profile__avatar');
+    const idValue = document.getElementById('avatar-input');
+    avatarImage.src = idValue.value;
+    event.currentTarget.reset();
+    closeAvatarForm();
+
+}
+
+
