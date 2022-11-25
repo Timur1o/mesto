@@ -1,31 +1,99 @@
-return fetch('https://nomoreparties.co/v1/plus-cohort-16/cards', {
-  headers: {
-    authorization: '24952460-73da-452d-95fc-2b05cf2309dc'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-  GET https://nomoreparties.co/v1/plus-cohort-16/users/me
-  authorization: '24952460-73da-452d-95fc-2b05cf2309dc'
-
-  GET https://nomoreparties.co/v1/plus-cohort-16/cards
-  authorization: '24952460-73da-452d-95fc-2b05cf2309dc'
-
-  PATCH https://nomoreparties.co/v1/plus-cohort-16/users/me
-
-  fetch('https://nomoreparties.co/v1/plus-cohort-16/users/me', {
-  method: 'PATCH',
+export const config = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/plus-cohort-16/',
   headers: {
     authorization: '24952460-73da-452d-95fc-2b05cf2309dc',
     'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: 'Jacques Cousteau',
-    about: 'Sailor, researcher'
-  })
-});
+  }
+}
 
-POST https://nomoreparties.co/v1/plus-cohort-16/cards
+async function api(url, data, method = 'GET') {
+  let options = {
+    method,
+    headers: config.headers
+  };
+  if (data) {
+    options.body = JSON.stringify(data);
+  }
+  const response = await fetch(`${config.baseUrl}${url}`, options);
+  try {
+    const result = await response.json();
+
+    return result;
+  } catch (err) {
+    console.error(err);
+    throw err
+  }
+}
+
+export const getProfileInfo = () => {
+  return api('users/me');
+};
+
+export const editProfileInfo = (name, about) => {
+  return api('users/me', {
+    name: name,
+    about: about,
+  }, 'PATCH');
+};
+
+
+export const getCardsInfo = () => {
+  return api('/cards')
+};
+
+export const user = {};
+
+export const addNewCard = (name, link) => {
+  return api('/cards', {
+    name: name,
+    link: link
+  }, 'POST')
+};
+
+export const removeCard = (cardId) => {
+  return api('/cards' + cardId, {
+    _id: user.id,
+  }, 'DELETE')
+};
+
+export const like = (cardId) => {
+  return api('cards/likes' + cardId, {
+    _id: user.id,
+  }, 'PUT')
+};
+
+export const dislike = (cardId) => {
+  return api('cards/likes' + cardId, {
+    _id: user.id,
+  }, 'DELETE')
+};
+
+export const editAvatar = (profileImage) => {
+  return api('users/me/avatar', {
+    avatar: profileImage,
+  }, 'PATCH')
+};
+
+/* function createCard({ item, onLike, ...options }) {
+  const { card, likeBtn } = renderCard({ item, ...options });
+  likeBtn.addEventlistener('click', () => {
+    onLike({ event, item, card, likeBtn });
+  });
+  return card;
+}
+
+Promise.all([
+  api.getProfile(), //получаем профиль чтобы был собственный ID пользователя
+  api.getCards() //получаем список карточек для рендера
+]).then(([user, cards]) => {
+  //перебираем и создаем карточки, для каждой делаем
+  createCard({
+    item, onLike: ({ likeBtn, item: { id } }) => { //при создании карточки передаем все обработчики из index.js
+      api.updateLike(id, user, isLiked(likeBtn)).then(result => { //проверяем лайк на кнопке по наличию класса
+        setLikeState(likeBtn, hasLike(result, user)); //после ответа сервера проверяем есть наш лайк в массиве или нет и проставляем на кнопке
+      }).catch(err => {
+        //...
+      })
+    }
+  })
+}) */

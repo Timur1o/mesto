@@ -24,6 +24,10 @@
   opacity: .8;
 }
 
+.popup__submit-button.disabled:hover {
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .popup__submit-button {
     font-size: 14px;

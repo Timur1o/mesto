@@ -1,17 +1,14 @@
-
+import { editProfileInfo } from './api';
 import {
     popupAdd, figcaption, popupImg, popupEdit, img,
     profileName, profileAbout, profileInfoTitle, profileInfoSubtitle, editForm, newPlaceForm,
     settings, popupAvatar
 } from './utils';
-import { hideInputError } from './validate';
+import { revalidateForm } from './validate';
 
 export function openPopup(popup) {
-    const openedForm = popup.querySelector('.popup__form');
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
-    openedForm.reset();
-    
 };
 
 export function closePopup(popup) {
@@ -26,10 +23,15 @@ function closeByEscape(evt) {
     }
 };
 
-export function openAddForm() {
+function resetForm(popup) {
+    const openedForm = popup.querySelector('.popup__form');
+    openedForm.reset();
+};
 
+export function openAddForm() {
     openPopup(popupAdd);
     revalidateForm({ formElement: newPlaceForm, ...settings });
+    resetForm(popupAdd);
 };
 
 export function closeAddForm() {
@@ -57,37 +59,31 @@ export function openProfileForm() {
     revalidateForm({ formElement: editForm, ...settings });
 };
 
-export function saveProfileForm(event) {
+export async function saveProfileForm(event) {
     event.stopPropagation();
     event.preventDefault();
+    const result = await editProfileInfo(profileName.value, profileAbout.value);
+    
+    profileInfoTitle.innerText = result.name;
+    profileInfoSubtitle.innerText = result.about;
 
-    function saveName(name) {
-        profileInfoTitle.innerText = name;
-    }
-
-    function saveJob(job) {
-        profileInfoSubtitle.innerText = job;
-    }
-
-    saveName(profileName.value);
-    saveJob(profileAbout.value);
     closeProfileForm();
 };
 
 export function openAvatarEdit() {
     openPopup(popupAvatar);
+    resetForm(popupAvatar);
 }
 
 export function closeAvatarForm() {
     closePopup(popupAvatar);
 }
 
-export function saveNewAvatar (event) {
+export function saveNewAvatar(event) {
     event.preventDefault();
-
     const avatarImage = document.querySelector('.profile__avatar');
-    const idValue = document.getElementById('avatar-input');
-    avatarImage.src = idValue.value;
+    const urlValue = document.getElementById('avatar-input');
+    avatarImage.src = urlValue.value;
     event.currentTarget.reset();
     closeAvatarForm();
 

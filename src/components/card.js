@@ -1,11 +1,12 @@
 import { cardName, cardLink, elementsList, template, initialCards } from './utils';
 import { closeAddForm, openImg } from './modal';
+import { getCardsInfo } from './api';
 
-export function drawInitialCards() {
-
+export async function drawInitialCards() {
+    const initialCards = await getCardsInfo();
     for (let i = 0; i < initialCards.length; i = i + 1) {
         const card = initialCards[i];
-        elementsList.prepend(getCard(card.name, card.link));
+        elementsList.prepend(getCard(card.name, card.link, card.likes));
     }
 
 };

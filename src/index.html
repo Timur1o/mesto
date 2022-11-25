@@ -74,7 +74,7 @@
   <section class="popup popup-avatar">
     <div class="popup__container">
       <form class="popup__form" name="avatar" novalidate>
-        <h2 class="popup__title">Редактировать аватар</h2>
+        <h2 class="popup__title">Обновить аватар</h2>
         <input data-error-message="Введите URL" type="url" id="avatar-input" name="avatar" class="popup__form-field"
         placeholder="Ссылка на картинку" required minlength="7">
       <span class="avatar-input-error popup__form-field-error"></span>
@@ -96,7 +96,10 @@
       <button aria-label="Delete" type="button" class="element__delete-button"></button>
       <div class="element__title-wrapper">
         <h2 class="element__title"></h2>
-        <button aria-label="Like" type="button" class="element__like-button"></button>
+        <div class="element__like-container">
+          <button aria-label="Like" type="button" class="element__like-button"></button>
+          <span class="element__like-count">0</span>
+        </div>
       </div>
     </li>
   </template>
