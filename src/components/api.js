@@ -72,28 +72,3 @@ export const like = (cardId) => {
 export const dislike = (cardId) => {
   return api('cards/likes/' + cardId, null, 'DELETE')
 };
-
-
-/* function createCard({ item, onLike, ...options }) {
-  const { card, likeBtn } = renderCard({ item, ...options });
-  likeBtn.addEventlistener('click', () => {
-    onLike({ event, item, card, likeBtn });
-  });
-  return card;
-}
-
-Promise.all([
-  api.getProfile(), //получаем профиль чтобы был собственный ID пользователя
-  api.getCards() //получаем список карточек для рендера
-]).then(([user, cards]) => {
-  //перебираем и создаем карточки, для каждой делаем
-  createCard({
-    item, onLike: ({ likeBtn, item: { id } }) => { //при создании карточки передаем все обработчики из index.js
-      api.updateLike(id, user, isLiked(likeBtn)).then(result => { //проверяем лайк на кнопке по наличию класса
-        setLikeState(likeBtn, hasLike(result, user)); //после ответа сервера проверяем есть наш лайк в массиве или нет и проставляем на кнопке
-      }).catch(err => {
-        //...
-      })
-    }
-  })
-}) */
