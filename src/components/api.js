@@ -7,7 +7,6 @@ export const config = {
   currentUser: {}
 }
 
-
 async function api(url, data, method = 'GET') {
   let options = {
     method,
@@ -47,7 +46,6 @@ export const editAvatar = async (avatar) => {
   return config.currentUser;
 };
 
-
 export const getCardsInfo = () => {
   return api('cards')
 };
@@ -59,10 +57,8 @@ export const addNewCard = (name, link) => {
   }, 'POST')
 };
 
-export const removeCard = (cardId) => {
-  return api('/cards' + cardId, {
-    _id: _id,
-  }, 'DELETE')
+export const deleteCard  = (cardId) => {
+  return api('cards/' + cardId, null , 'DELETE')
 };
 
 export const like = (cardId) => {

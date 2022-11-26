@@ -2,9 +2,11 @@ import '../styles/index.css';
 import { enableValidation } from './validate';
 import { addCard, drawInitialCards } from './card';
 import { closePopup, openAddForm, openProfileForm, saveProfileForm, openAvatarEdit, saveNewAvatar } from './modal';
-import { editForm, newPlaceForm, editProfileOpen, addCardForm, settings, profileAvatar, avatarEditForm, avatarOverlay,
-     profileInfoTitle, profileInfoSubtitle } from './utils';
-import { getProfileInfo, getCards, editProfileInfo, addNewCard, config, editAvatar, user } from "./api";
+import {
+    editForm, newPlaceForm, editProfileOpen, addCardForm, settings, profileAvatar, avatarEditForm, avatarOverlay,
+    profileInfoTitle, profileInfoSubtitle
+} from './utils';
+import { getProfileInfo } from "./api";
 
 window.addEventListener('load', async function () {
     await fillProfile();

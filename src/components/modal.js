@@ -78,16 +78,16 @@ export async function saveNewAvatar(event) {
     event.target.reset();
     closeAvatarForm();
     avatarEditForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранить';
-}
+};
 
 export function openAvatarEdit() {
     openPopup(popupAvatar);
     resetForm(popupAvatar);
-}
+};
 
 export function closeAvatarForm() {
     closePopup(popupAvatar);
-}
+};
 
 
 

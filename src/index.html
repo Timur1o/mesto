@@ -17,8 +17,11 @@
         <div class="profile__edit-container">
           <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватар.">
           <div class="profile__edit-overlay">
-            <svg class="profile__avatar-edit-button" id="avatar-edit-button" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M26 3.45351L6.76981 22.7932L3.33585 19.2903L22.517 0L26 3.45351ZM0 26L5.10189 24.4706L1.52075 21.0171L0 26Z" fill="white"/>
+            <svg class="profile__avatar-edit-button" id="avatar-edit-button" viewBox="0 0 26 26" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M26 3.45351L6.76981 22.7932L3.33585 19.2903L22.517 0L26 3.45351ZM0 26L5.10189 24.4706L1.52075 21.0171L0 26Z"
+                fill="white" />
             </svg>
           </div>
         </div>
@@ -76,9 +79,9 @@
       <form class="popup__form" name="avatar" novalidate>
         <h2 class="popup__title">Обновить аватар</h2>
         <input data-error-message="Введите URL" type="url" id="avatar-input" name="avatar" class="popup__form-field"
-        placeholder="Ссылка на картинку" required minlength="7">
-      <span class="avatar-input-error popup__form-field-error"></span>
-      <button aria-label="Save" type="submit" class="popup__submit-button">Сохранить</button>
+          placeholder="Ссылка на картинку" required minlength="7">
+        <span class="avatar-input-error popup__form-field-error"></span>
+        <button aria-label="Save" type="submit" class="popup__submit-button">Сохранить</button>
       </form>
       <button aria-label="Close" type="button" class="popup__close-button"></button>
     </div>
