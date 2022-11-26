@@ -1,8 +1,8 @@
-import { editProfileInfo } from './api';
+import { editAvatar, editProfileInfo } from './api';
 import {
     popupAdd, figcaption, popupImg, popupEdit, img,
     profileName, profileAbout, profileInfoTitle, profileInfoSubtitle, editForm, newPlaceForm,
-    settings, popupAvatar
+    settings, popupAvatar, profileAvatar, avatarImg, avatarEditForm
 } from './utils';
 import { revalidateForm } from './validate';
 
@@ -62,13 +62,23 @@ export function openProfileForm() {
 export async function saveProfileForm(event) {
     event.stopPropagation();
     event.preventDefault();
+    newPlaceForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранение...';
     const result = await editProfileInfo(profileName.value, profileAbout.value);
-    
     profileInfoTitle.innerText = result.name;
     profileInfoSubtitle.innerText = result.about;
-
     closeProfileForm();
+    editForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранить';
 };
+
+export async function saveNewAvatar(event) {
+    event.preventDefault();
+    avatarEditForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранение...';
+    const result = await editAvatar(avatarImg.value)
+    profileAvatar.src = result.avatar;
+    event.target.reset();
+    closeAvatarForm();
+    avatarEditForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранить';
+}
 
 export function openAvatarEdit() {
     openPopup(popupAvatar);
@@ -79,14 +89,6 @@ export function closeAvatarForm() {
     closePopup(popupAvatar);
 }
 
-export function saveNewAvatar(event) {
-    event.preventDefault();
-    const avatarImage = document.querySelector('.profile__avatar');
-    const urlValue = document.getElementById('avatar-input');
-    avatarImage.src = urlValue.value;
-    event.currentTarget.reset();
-    closeAvatarForm();
 
-}
 
 

@@ -2,12 +2,13 @@ import '../styles/index.css';
 import { enableValidation } from './validate';
 import { addCard, drawInitialCards } from './card';
 import { closePopup, openAddForm, openProfileForm, saveProfileForm, openAvatarEdit, saveNewAvatar } from './modal';
-import { editForm, newPlaceForm, editProfileOpen, addCardForm, settings, avatarImg, avatarEditForm, avatarOverlay, profileInfoTitle, profileInfoSubtitle } from './utils';
+import { editForm, newPlaceForm, editProfileOpen, addCardForm, settings, profileAvatar, avatarEditForm, avatarOverlay,
+     profileInfoTitle, profileInfoSubtitle } from './utils';
 import { getProfileInfo, getCards, editProfileInfo, addNewCard, config, editAvatar, user } from "./api";
 
 window.addEventListener('load', async function () {
-    await drawInitialCards();
     await fillProfile();
+    await drawInitialCards();
     editProfileOpen.addEventListener('click', openProfileForm);
     editForm.addEventListener('submit', saveProfileForm);
     newPlaceForm.addEventListener('submit', addCard);
@@ -34,7 +35,7 @@ async function fillProfile() {
     const result = await getProfileInfo();
     profileInfoTitle.innerText = result.name;
     profileInfoSubtitle.innerText = result.about;
-    avatarImg.src = result.avatar;
+    profileAvatar.src = result.avatar;
 };
 
 

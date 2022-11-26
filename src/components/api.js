@@ -3,8 +3,10 @@ export const config = {
   headers: {
     authorization: '24952460-73da-452d-95fc-2b05cf2309dc',
     'Content-Type': 'application/json'
-  }
+  },
+  currentUser: {}
 }
+
 
 async function api(url, data, method = 'GET') {
   let options = {
@@ -25,26 +27,33 @@ async function api(url, data, method = 'GET') {
   }
 }
 
-export const getProfileInfo = () => {
-  return api('users/me');
+export const getProfileInfo = async () => {
+  config.currentUser = await api('users/me');
+  return config.currentUser;
 };
 
-export const editProfileInfo = (name, about) => {
-  return api('users/me', {
+export const editProfileInfo = async (name, about) => {
+  config.currentUser = await api('users/me', {
     name: name,
     about: about,
   }, 'PATCH');
+  return config.currentUser;
+};
+
+export const editAvatar = async (avatar) => {
+  config.currentUser = await api('users/me/avatar', {
+    avatar: avatar,
+  }, 'PATCH');
+  return config.currentUser;
 };
 
 
 export const getCardsInfo = () => {
-  return api('/cards')
+  return api('cards')
 };
 
-export const user = {};
-
 export const addNewCard = (name, link) => {
-  return api('/cards', {
+  return api('cards', {
     name: name,
     link: link
   }, 'POST')
@@ -52,27 +61,18 @@ export const addNewCard = (name, link) => {
 
 export const removeCard = (cardId) => {
   return api('/cards' + cardId, {
-    _id: user.id,
+    _id: _id,
   }, 'DELETE')
 };
 
 export const like = (cardId) => {
-  return api('cards/likes' + cardId, {
-    _id: user.id,
-  }, 'PUT')
+  return api('cards/likes/' + cardId, null, 'PUT')
 };
 
 export const dislike = (cardId) => {
-  return api('cards/likes' + cardId, {
-    _id: user.id,
-  }, 'DELETE')
+  return api('cards/likes/' + cardId, null, 'DELETE')
 };
 
-export const editAvatar = (profileImage) => {
-  return api('users/me/avatar', {
-    avatar: profileImage,
-  }, 'PATCH')
-};
 
 /* function createCard({ item, onLike, ...options }) {
   const { card, likeBtn } = renderCard({ item, ...options });
