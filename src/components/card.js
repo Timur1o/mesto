@@ -1,4 +1,4 @@
-import { cardName, cardLink, elementsList, template, settings, newPlaceForm } from './utils';
+import { cardName, cardLink, elementsList, template, newPlaceForm, renderLoading, renderLoaded, currentUser } from './utils';
 import { closeAddForm, openImg } from './modal';
 import { getCardsInfo, addNewCard, config, dislike, like, deleteCard } from './api';
 
@@ -21,14 +21,19 @@ export async function drawInitialCards() {
 };
 
 export async function addCard(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    newPlaceForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранение...';
-    const addCard = await addNewCard(cardName.value, cardLink.value);
-    elementsList.prepend(getCard(addCard));
-    event.target.reset();
-    closeAddForm();
-    newPlaceForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Создать';
+    try {
+        event.stopPropagation();
+        event.preventDefault();
+        renderLoading(newPlaceForm);
+        const addCard = await addNewCard(cardName.value, cardLink.value);
+        elementsList.prepend(getCard(addCard));
+        event.target.reset();
+        closeAddForm();
+        renderLoaded(newPlaceForm);
+    }
+    catch {
+        console.log(error);
+    }
 };
 
 export async function removeCard(cardId) {
@@ -47,25 +52,29 @@ export function getCard(cardData) {
     cardClone.querySelector('.element__title').textContent = name;
     cardClone.querySelector('.element__like-count').textContent = likes.length;
     elementImage.addEventListener('click', openImg);
-    const isLiked = likes.some(like => config.currentUser._id === like._id);
+    const isLiked = likes.some(like => currentUser._id === like._id);
     const likeBtn = cardClone.querySelector('.element__like-button');
     likeBtn.classList.toggle('element__like-button_active', isLiked);
-    cardClone.querySelector('.element__like-button').addEventListener('click', (event) => toggleLike(isLiked, cardId));
-    const isMyCard = (owner._id === config.currentUser._id);
+    cardClone.querySelector('.element__like-button').addEventListener('click', (event) => toggleLike(cardId));
+    const isMyCard = (owner._id === currentUser._id);
     if (!isMyCard) {
         cardClone.querySelector('.element__delete-button').remove();
     } else {
         cardClone.querySelector('.element__delete-button').addEventListener('click', (event) => removeCard(cardId));
     }
     return cardClone;
-
 };
 
-export async function toggleLike(isLiked, cardId) {
-    const cardData = isLiked ? await dislike(cardId) : await like(cardId);
-    const newCard = getCard(cardData);
+export async function toggleLike(cardId) {
     const oldCard = elementsList.querySelector(`li[data-id="${cardId}"]`);
-    oldCard.replaceWith(newCard);
+    const likeBtn = oldCard.querySelector('.element__like-button');
+    const isLiked = likeBtn.classList.contains('element__like-button_active')
+    const cardData = isLiked ? await dislike(cardId) : await like(cardId);
+    oldCard.querySelector('.element__like-count').textContent = cardData.likes.length;
+    const newIsLiked = cardData.likes.some(like => currentUser._id === like._id);
+    likeBtn.classList.toggle('element__like-button_active', newIsLiked);
 };
+
+
 
 

@@ -2,7 +2,7 @@ import { editAvatar, editProfileInfo } from './api';
 import {
     popupAdd, figcaption, popupImg, popupEdit, img,
     profileName, profileAbout, profileInfoTitle, profileInfoSubtitle, editForm, newPlaceForm,
-    settings, popupAvatar, profileAvatar, avatarImg, avatarEditForm
+    settings, popupAvatar, profileAvatar, avatarImg, avatarEditForm, renderLoading, renderLoaded, setUserInfo, setCurrentUser
 } from './utils';
 import { revalidateForm } from './validate';
 
@@ -62,22 +62,21 @@ export function openProfileForm() {
 export async function saveProfileForm(event) {
     event.stopPropagation();
     event.preventDefault();
-    newPlaceForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранение...';
-    const result = await editProfileInfo(profileName.value, profileAbout.value);
-    profileInfoTitle.innerText = result.name;
-    profileInfoSubtitle.innerText = result.about;
+    renderLoading(newPlaceForm);
+    setCurrentUser(await editProfileInfo(profileName.value, profileAbout.value));
+    setUserInfo();
     closeProfileForm();
-    editForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранить';
+    renderLoaded(editForm);
 };
 
 export async function saveNewAvatar(event) {
     event.preventDefault();
-    avatarEditForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранение...';
-    const result = await editAvatar(avatarImg.value)
-    profileAvatar.src = result.avatar;
+    renderLoading(avatarEditForm);
+    setCurrentUser(await editAvatar(avatarImg.value));
+    setUserInfo();
     event.target.reset();
     closeAvatarForm();
-    avatarEditForm.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранить';
+    renderLoaded(avatarEditForm);;
 };
 
 export function openAvatarEdit() {

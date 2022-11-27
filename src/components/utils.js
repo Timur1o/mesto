@@ -42,6 +42,18 @@ export const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
 }];
 
+export let currentUser = {}
+
+export function setCurrentUser(newCurrentUser) {
+    currentUser = newCurrentUser;
+}
+
+export function setUserInfo() {
+    profileInfoTitle.innerText = currentUser.name;
+    profileInfoSubtitle.innerText = currentUser.about;
+    profileAvatar.src = currentUser.avatar;
+}
+
 export const settings = {
     popupSubmitButtonSelector: '.popup__submit-button',
     popupFormField: '.popup__form-field',
@@ -49,4 +61,16 @@ export const settings = {
     popupFormFieldTypeError: 'popup__form-field_type_error'
 }
 
+export function renderLoading(form) {
+    form.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранение...';
+}
+
+export function renderLoaded(form) {
+    if (form === newPlaceForm) {
+        form.querySelector(settings.popupSubmitButtonSelector).textContent = 'Создать';
+    }
+    else {
+        form.querySelector(settings.popupSubmitButtonSelector).textContent = 'Сохранить';
+    }
+}
 
