@@ -3,20 +3,25 @@ import { closeAddForm, openImg } from './modal';
 import { getCardsInfo, addNewCard, config, dislike, like, deleteCard } from './api';
 
 export async function drawInitialCards() {
-    const initialCards = await getCardsInfo();
-    initialCards.sort(function (a, b) {
-        if (new Date(a.createdAt) > new Date(b.createdAt)) {
-            return 1
+    try {
+        const initialCards = await getCardsInfo();
+        initialCards.sort(function (a, b) {
+            if (new Date(a.createdAt) > new Date(b.createdAt)) {
+                return 1
+            }
+            if (new Date(a.createdAt) < new Date(b.createdAt)) {
+                return -1
+            }
+            return 0;
+        })
+        for (let i = 0; i < initialCards.length; i = i + 1) {
+            const card = initialCards[i];
+            const newCard = getCard(card);
+            elementsList.prepend(newCard);
         }
-        if (new Date(a.createdAt) < new Date(b.createdAt)) {
-            return -1
-        }
-        return 0;
-    })
-    for (let i = 0; i < initialCards.length; i = i + 1) {
-        const card = initialCards[i];
-        const newCard = getCard(card);
-        elementsList.prepend(newCard);
+    }
+    catch (error) {
+        return Promise.reject(error);
     }
 };
 
@@ -27,12 +32,13 @@ export async function addCard(event) {
         renderLoading(newPlaceForm);
         const addCard = await addNewCard(cardName.value, cardLink.value);
         elementsList.prepend(getCard(addCard));
-        event.target.reset();
         closeAddForm();
-        renderLoaded(newPlaceForm);
     }
-    catch {
-        console.log(error);
+    catch (error) {
+        return Promise.reject(error);
+    }
+    finally {
+        renderLoaded(newPlaceForm);
     }
 };
 
@@ -66,13 +72,18 @@ export function getCard(cardData) {
 };
 
 export async function toggleLike(cardId) {
-    const oldCard = elementsList.querySelector(`li[data-id="${cardId}"]`);
-    const likeBtn = oldCard.querySelector('.element__like-button');
-    const isLiked = likeBtn.classList.contains('element__like-button_active')
-    const cardData = isLiked ? await dislike(cardId) : await like(cardId);
-    oldCard.querySelector('.element__like-count').textContent = cardData.likes.length;
-    const newIsLiked = cardData.likes.some(like => currentUser._id === like._id);
-    likeBtn.classList.toggle('element__like-button_active', newIsLiked);
+    try {
+        const oldCard = elementsList.querySelector(`li[data-id="${cardId}"]`);
+        const likeBtn = oldCard.querySelector('.element__like-button');
+        const isLiked = likeBtn.classList.contains('element__like-button_active')
+        const cardData = isLiked ? await dislike(cardId) : await like(cardId);
+        oldCard.querySelector('.element__like-count').textContent = cardData.likes.length;
+        const newIsLiked = cardData.likes.some(like => currentUser._id === like._id);
+        likeBtn.classList.toggle('element__like-button_active', newIsLiked);
+    }
+    catch (error) {
+        return Promise.reject(error);
+    }
 };
 
 

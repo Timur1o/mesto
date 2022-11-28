@@ -35,8 +35,11 @@ window.addEventListener('load', async function () {
 });
 
 async function fillProfile() {
-    setCurrentUser(await getProfileInfo());
-    setUserInfo();
+    try {setCurrentUser(await getProfileInfo());
+    setUserInfo();}
+    catch (error) {
+        return Promise.reject(error);
+    }
 };
 
 

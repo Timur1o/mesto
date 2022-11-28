@@ -2,7 +2,7 @@ import { editAvatar, editProfileInfo } from './api';
 import {
     popupAdd, figcaption, popupImg, popupEdit, img,
     profileName, profileAbout, profileInfoTitle, profileInfoSubtitle, editForm, newPlaceForm,
-    settings, popupAvatar, profileAvatar, avatarImg, avatarEditForm, renderLoading, renderLoaded, setUserInfo, setCurrentUser
+    settings, popupAvatar, avatarImg, avatarEditForm, renderLoading, renderLoaded, setUserInfo, setCurrentUser
 } from './utils';
 import { revalidateForm } from './validate';
 
@@ -30,8 +30,9 @@ function resetForm(popup) {
 
 export function openAddForm() {
     openPopup(popupAdd);
-    revalidateForm({ formElement: newPlaceForm, ...settings });
     resetForm(popupAdd);
+    revalidateForm({ formElement: newPlaceForm, ...settings });
+
 };
 
 export function closeAddForm() {
@@ -60,28 +61,43 @@ export function openProfileForm() {
 };
 
 export async function saveProfileForm(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    renderLoading(newPlaceForm);
-    setCurrentUser(await editProfileInfo(profileName.value, profileAbout.value));
-    setUserInfo();
-    closeProfileForm();
-    renderLoaded(editForm);
+    try {
+        event.stopPropagation();
+        event.preventDefault();
+        renderLoading(editForm);
+        setCurrentUser(await editProfileInfo(profileName.value, profileAbout.value));
+        setUserInfo();
+        closeProfileForm();
+    }
+    catch (error) {
+        return Promise.reject(error);
+    }
+    finally {
+        renderLoaded(editForm);
+    }
 };
 
 export async function saveNewAvatar(event) {
-    event.preventDefault();
-    renderLoading(avatarEditForm);
-    setCurrentUser(await editAvatar(avatarImg.value));
-    setUserInfo();
-    event.target.reset();
-    closeAvatarForm();
-    renderLoaded(avatarEditForm);;
+    try {
+        event.preventDefault();
+        renderLoading(avatarEditForm);
+        setCurrentUser(await editAvatar(avatarImg.value));
+        setUserInfo();
+        closeAvatarForm();
+    }
+    catch (error) {
+        return Promise.reject(error);
+    }
+    finally {
+        renderLoaded(avatarEditForm);
+    }
 };
 
 export function openAvatarEdit() {
     openPopup(popupAvatar);
     resetForm(popupAvatar);
+    revalidateForm({ formElement: avatarEditForm, ...settings });
+ 
 };
 
 export function closeAvatarForm() {
